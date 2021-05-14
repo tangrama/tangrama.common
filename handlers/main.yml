@@ -1,0 +1,13 @@
+---
+# handlers file for tangrama.common
+- name: Restart sshd
+  become: true
+  service:
+    name: ssh
+    state: restarted
+
+- name: restart systemd-logind
+  become: true
+  service:
+    name: systemd-logind
+    state: restarted

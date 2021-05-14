@@ -1,0 +1,26 @@
+---
+# Configure sane settings for sshd
+- name: Configure SSHD
+  become: true
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    backup: yes
+  with_items:
+    - { regexp: '^PermitRootLogin', line: 'PermitRootLogin no'}
+    - { regexp: '^Port', line: 'Port {{ ssh_port }}'}
+    - { regexp: '^X11Forwarding', line: 'X11Forwarding no'}
+    - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication no'}
+  notify: Restart sshd
+
+- name: Harden SSH config (ClientAliveInterval)
+  become: true
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "{{ item }}"
+  with_items:
+    - "ClientAliveInterval 300"
+    - "ClientAliveCountMax 0"
+  notify: Restart sshd

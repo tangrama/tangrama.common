@@ -1,0 +1,29 @@
+---
+# defaults file for tangrama.common
+#
+ssh_port: 6822
+hostname: 'dummy'
+fqdn: '{{ hostname }}.example.com'
+unattended_upgrades_mail_to: 'noop@example.com'
+
+# Admins should be informed via email
+needrestart_notifyd_disable_email: 0
+
+# All other notifications should be disabled
+needrestart_notifyd_disable_write_tty: 1
+needrestart_notifyd_disable_needrestart_session: 1
+needrestart_notifyd_disable_notify_send: 1
+
+# Restart services (l)ist only, (i)nteractive or (a)utomatically.
+needrestart_action: a
+
+# Email which will be notified
+needrestart_mail_address: $NR_USERNAME
+
+# Services which should be ignored
+needrestart_ignorelist: []
+
+# needrestart check_mk related
+needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
+needrestart_checkmk_localcheck: False
+needrestart_checkmk_mrpe: False

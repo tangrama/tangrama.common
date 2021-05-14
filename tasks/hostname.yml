@@ -1,0 +1,16 @@
+---
+# Configure hostname
+- name: Configure server hostname
+  become: true
+  ansible.builtin.hostname:
+    name: "{{ fqdn }}"
+
+# Add the fqdn to the /etc/hosts
+- name: "Add {{ fqdn }} to /etc/hosts"
+  become: true
+  lineinfile:
+    dest: /etc/hosts
+    line: "127.0.0.1 {{ fqdn }} {{ hostname }}"
+    state: present
+    backup: true
+  when: molecule_testing is not defined

@@ -1,0 +1,31 @@
+---
+# Install base packages
+- name: Install base packages
+  become: true
+  apt:
+    update_cache: yes
+    name:
+      - aptitude
+      - curl
+      - iproute2
+      - needrestart
+      - openssh-server
+      - python3-apt
+      - python3-minimal
+      - python3-pip
+      - rsync
+      - unattended-upgrades
+    state: present
+
+# Configure needsrestart
+- name: Ensure Needrestart config is latest
+  become: true
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/needrestart/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - notify.conf
+    - needrestart.conf

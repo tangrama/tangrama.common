@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: tangrama.common
+  vars:
+    molecule_testing: true
+    hostname: 'plone'
+    fqdn: 'plone.tangrama.com.br'
+    unattended_upgrades_mail_to: 'noop@tangrama.com.br'
+    ssh_port: 9923

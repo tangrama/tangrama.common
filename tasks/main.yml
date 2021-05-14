@@ -1,0 +1,6 @@
+---
+# tasks file for tangrama.common
+- import_tasks: hostname.yml
+- import_tasks: packages.yml
+- import_tasks: sshd.yml
+- import_tasks: unattended-upgrades.yml

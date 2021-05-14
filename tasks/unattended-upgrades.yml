@@ -1,0 +1,16 @@
+---
+- name: Adjust APT update intervals
+  become: true
+  copy:
+    src: apt_periodic
+    dest: /etc/apt/apt.conf.d/10periodic
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Enable Unattended-Upgrade::Mail"
+  become: true
+  lineinfile:
+    path: "/etc/apt/apt.conf.d/50unattended-upgrades"
+    regexp: '^.*Unattended-Upgrade::Mail ".*";$'
+    line: 'Unattended-Upgrade::Mail "{{ unattended_upgrades_mail_to }}";'
