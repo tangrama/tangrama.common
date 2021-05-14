@@ -9,7 +9,16 @@ lint: |
   ansible-lint .
   flake8
 platforms:
-  - name: instance
+  - name: ubuntu1804
+    image: ubuntu:18.04
+    privileged: true
+    capabilities:
+      - SYS_ADMIN
+      - SYSLOG
+      - NET_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu2004
     image: ubuntu:20.04
     privileged: true
     capabilities:
@@ -21,10 +30,9 @@ platforms:
 provisioner:
   name: ansible
   inventory:
-    host_vars:
-      instance:
-        ansible_user: ansible
-        ansible_python_interpreter: /usr/bin/python3
+    group_vars:
+      ansible_user: ansible
+      ansible_python_interpreter: /usr/bin/python3
 verifier:
   name: testinfra
 scenario:
