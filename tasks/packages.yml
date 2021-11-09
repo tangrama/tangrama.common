@@ -5,8 +5,10 @@
   apt:
     update_cache: yes
     name:
+      - acl
       - aptitude
       - curl
+      - docker.io
       - iproute2
       - needrestart
       - openssh-server

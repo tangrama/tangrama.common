@@ -9,8 +9,10 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 @pytest.mark.parametrize(
     "package_name", [
+        "acl",
         "aptitude",
         "curl",
+        "docker.io",
         "iproute2",
         "needrestart",
         "openssh-server",
